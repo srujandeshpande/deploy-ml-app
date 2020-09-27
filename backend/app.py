@@ -20,7 +20,6 @@ def search_by_url(url):
     download_url(url, dest)
     val = learn_inf.predict('temp.jpg')
     return [val[0], val[2][0].item(), val[2][1].item(), val[2][2].item()]
-<<<<<<< HEAD
 
 
 def search_by_image(image):
@@ -28,8 +27,6 @@ def search_by_image(image):
     open(dest, 'wb').write(image)
     val = learn_inf.predict('temp.jpg')
     return [val[0], val[2][0].item(), val[2][1].item(), val[2][2].item()]
-=======
->>>>>>> 1aff110d74bb1c552bd5b62c6f4872eb8d34fbfc
 
 
 @app.route('/')
@@ -38,11 +35,7 @@ def hello_world():
     return 'Hello, World!'
 
 
-<<<<<<< HEAD
 @app.route('/api/url/bear', methods=['POST'])
-=======
-@app.route('/api/bear/url', methods=['POST'])
->>>>>>> 1aff110d74bb1c552bd5b62c6f4872eb8d34fbfc
 @cross_origin()
 def bear_hunt():
     data = request.json
@@ -50,17 +43,9 @@ def bear_hunt():
     return {"prediction":ans}
 
 
-<<<<<<< HEAD
 @app.route('/api/image/bear', methods=['POST'])
 @cross_origin()
 def bear_hunt_image():
     data = request.json
     ans = search_by_url(data['image'])
-=======
-@app.route('/api/bear/image', methods=['POST'])
-@cross_origin()
-def bear_hunt_image():
-    data = request.json
-    ans = search_by_url(data['url'])
->>>>>>> 1aff110d74bb1c552bd5b62c6f4872eb8d34fbfc
     return {"prediction":ans}
