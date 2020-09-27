@@ -11,21 +11,16 @@ function App() {
   const [result, setResult] = useState(null);
 
   async function sendLinks() {
-    fetch("https://")
-      .then(res => res.json())
-      .then(
-        (result) => {
-          setIsLoaded(true);
-          setItems(result.items);
-        },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
-        }
-      )
+    const result = await axios({
+      method: 'post',
+      url: 'http://localhost:5000/api/bear',
+      data: {
+      url: url
+      }
+    });
+
+    setResult(result.data);
+    console.log(result);
   }
 
   return (
@@ -34,7 +29,7 @@ function App() {
         <p>
           Choose your bear picture!
         </p>
-        <form>
+        <form onSubmit={(e) => { e.preventDefault(); sendLinks()}}>
           <input type="file" onChange={(e) => { e.preventDefault(); setImage(e.target.value)}}></input>
           <input type="submit"></input>
         </form>
@@ -44,7 +39,7 @@ function App() {
         <p>
           Enter a URL!
         </p>
-        <form>
+        <form onSubmit={(e) => { e.preventDefault(); sendLinks()}}>
           <input type="url" onChange={(e) => { e.preventDefault(); setUrl(e.target.value)}}></input>
           <input type="submit"></input>
         </form>
