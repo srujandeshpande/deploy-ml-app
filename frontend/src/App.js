@@ -12,6 +12,7 @@ function App() {
   const [grizzlybear, setGrizzly] = useState(0);
   const [teddybear, setTeddy] = useState(0);
   const [viewres, setViewres] = useState(0);
+  const [bear, setBear] = useState(null);
 
   async function sendLink() {
     const result = await axios({
@@ -31,6 +32,7 @@ function App() {
     setGrizzly(res[2]);
     setTeddy(res[3]);
     setViewres(1);
+    setBear(res[0]);
   }
 
 
@@ -39,8 +41,9 @@ function App() {
       return(
         <>
       <p>
-        Here are your results!
+        You are a {bear} bear!
       </p>
+      <img src={url}></img>
       <h6>
       Black Bear: {blackbear}
       </h6>
