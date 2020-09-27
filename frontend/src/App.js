@@ -10,23 +10,35 @@ function App() {
   const [image, setImage] = useState(null);
   const [result, setResult] = useState(null);
 
-  async function sendLinks() {
-    fetch("https://")
-      .then(res => res.json())
-      .then(
-        (result) => {
-          setIsLoaded(true);
-          setItems(result.items);
-        },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
-        }
-      )
+  async function sendLink() {
+    const result = await axios({
+      method: 'post',
+      url: 'http://localhost:5000/api/url/bear',
+      data: {
+      url: url
+      }
+    });
+
+    setResult(result.data);
+    console.log(result);
   }
+
+  async function sendImage() {
+
+    console.log(image);
+
+    // Request made to the backend api
+
+    const result = await axios({
+      method: 'post',
+      url: 'http://localhost:5000/api/image/bear',
+      data: image
+    });
+
+    setResult(result.data);
+    console.log(result);
+  }
+
 
   return (
     <div className="App">
@@ -34,8 +46,8 @@ function App() {
         <p>
           Choose your bear picture!
         </p>
-        <form>
-          <input type="file" onChange={(e) => { e.preventDefault(); setImage(e.target.value)}}></input>
+        <form onSubmit={(e) => { e.preventDefault(); sendImage()}}>
+          <input type="file" onChange={(e) => { e.preventDefault(); setImage(e.target.files[0])}}></input>
           <input type="submit"></input>
         </form>
         <p>
@@ -44,7 +56,7 @@ function App() {
         <p>
           Enter a URL!
         </p>
-        <form>
+        <form onSubmit={(e) => { e.preventDefault(); sendLink()}}>
           <input type="url" onChange={(e) => { e.preventDefault(); setUrl(e.target.value)}}></input>
           <input type="submit"></input>
         </form>
