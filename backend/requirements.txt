@@ -2,3 +2,5 @@ flask
 flask-cors
 urllib3
 gunicorn
+fastai==2.0.13
+IPython
