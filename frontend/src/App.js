@@ -17,7 +17,7 @@ function App() {
   async function sendLink() {
     const result = await axios({
       method: 'post',
-      url: 'http://localhost:5000/api/url/bear',
+      url: 'http://52.146.81.185:8000/api/url/bear',
       data: {
       url: url
       }
