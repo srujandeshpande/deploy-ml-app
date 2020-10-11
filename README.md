@@ -8,3 +8,9 @@ View the Webinar hosted by Manikya Bardhan and Srujan Deshpande at https://www.y
 3. Add your model
 4. To test locally, `flask run`
 5. To deploy with docker, `sudo docker build --tag=<insert-tag-name-here>`
+
+## Frontend Setup
+1. `cd frontend`
+2. `npm install`
+3. To test locally, `npm start`
+4. To build production files, `npm run build`
